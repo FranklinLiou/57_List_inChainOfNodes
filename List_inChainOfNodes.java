@@ -15,7 +15,7 @@ public class List_inChainOfNodes{
     public List_inChainOfNodes() {
       list = new Node[INITIAL_CAPACITY];
     }
-     
+
 
     /**
       @return the number of elements in this list
@@ -24,11 +24,11 @@ public class List_inChainOfNodes{
       return filledElements;
     }
 
-    
+
      /**
        @return a string representation of this list,
        format:
-           # elements [element0,element1,element2,] 
+           # elements [element0,element1,element2,]
       */
     public String toString() {
       String stringList = "elements [";
@@ -38,8 +38,8 @@ public class List_inChainOfNodes{
       stringList += "]";
       return stringList;
     }
-    
-    
+
+
     /**
       Append @value to the head of this list.
 
@@ -51,5 +51,19 @@ public class List_inChainOfNodes{
         headReference = newHead;
         filledElements ++;
         return true;
+     }
+
+     /*
+      Append @value to a specified index.
+
+      @return true "in keeping with conventions"
+     */
+     public boolean add( int index, Object value) {
+       Node addedNode = new Node(value, list[index]);
+       list[index - 1].setReferenceToNextNode(addedNode);
+       for (int hole = filledElements; hole > index; hole--) {
+         list[hole] = list [hole - 1];
+       }
+       return true;
      }
 }
