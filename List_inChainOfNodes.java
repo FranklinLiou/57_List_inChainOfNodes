@@ -53,6 +53,27 @@ public class List_inChainOfNodes{
         return true;
      }
 
+
+     public Node get( int index) {
+      return list[index];
+     }
+
+     public Node set( int index, Object value) {
+      Node saveForReturn = get( index);
+      Node newNode = new Node(value, list[index + 1]);
+      list[index] = newNode;
+      return saveForReturn;
+     }
+
+     public Node remove( int index) {
+      Node result = list[index];
+      for (int fill = index; fill < filledElements; fill++) {
+        list[fill] = list[fill + 1];
+      }
+      filledElements--;
+      return result;
+     }
+
      /*
       Append @value to a specified index.
 
@@ -60,10 +81,12 @@ public class List_inChainOfNodes{
      */
      public boolean add( int index, Object value) {
        Node addedNode = new Node(value, list[index]);
-       list[index - 1].setReferenceToNextNode(addedNode);
+       System.out.println(addedNode);
        for (int hole = filledElements; hole > index; hole--) {
-         list[hole] = list [hole - 1];
+         list[hole] = list[hole - 1];
        }
+       list[index] = addedNode;
+       list[index - 1].setReferenceToNextNode(addedNode);
        return true;
      }
 }

@@ -23,7 +23,26 @@ public class UserOfList {
             list.addAsHead( elem);
             System.out.println( "number of elements: " + list.size() );
         }
+        System.out.println( "populated list: " + list);
+        System.out.println(System.lineSeparator());
+
+        // testing get method
+        System.out.println(list.get(1));
+
+        //testing set method
+        System.out.println(list.set(3, "n"));
+        System.out.println(list);
+
+        //testing remove method
+        System.out.println(list.remove(1));
+        System.out.println(list);
+
+        // testing add method
+        System.out.println(list);
+        list.add(3, "d");
+        System.out.println( "number of elements: " + list.size());
         System.out.println( "populated list: " + list
                           + System.lineSeparator());
+
     }
 }
