@@ -47,7 +47,7 @@ public class List_inChainOfNodes{
      */
      public boolean addAsHead( Object val) {
         Node newHead = new Node(val, headReference);
-        System.out.println(newHead);
+        // System.out.println(newHead);
         headReference = newHead;
         filledElements ++;
         return true;
