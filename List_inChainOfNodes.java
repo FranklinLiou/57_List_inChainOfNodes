@@ -3,17 +3,12 @@
  */
 
 public class List_inChainOfNodes{
-    private Node[] list;
     private Node headReference;
-    private int filledElements;
-
-    private static final int INITIAL_CAPACITY = 10;
 
     /**
       Construct an empty list
      */
     public List_inChainOfNodes() {
-      list = new Node[INITIAL_CAPACITY];
     }
 
 
@@ -21,7 +16,11 @@ public class List_inChainOfNodes{
       @return the number of elements in this list
      */
     public int size() {
-      return filledElements;
+      int result = 0;
+      for (Node node = headReference; node != null; node.getReferenceToNextNode()) {
+        result++;
+      }
+      return result;
     }
 
 
@@ -32,8 +31,8 @@ public class List_inChainOfNodes{
       */
     public String toString() {
       String stringList = "elements [";
-      for (int element = 0; element < filledElements; element++) {
-        stringList = stringList + list[element] + ",";
+      for (Node node = headReference; node != null; node.getReferenceToNextNode()) {
+        stringList = stringList + node.getCargoReference() + ",";
       }
       stringList += "]";
       return stringList;
@@ -47,30 +46,29 @@ public class List_inChainOfNodes{
      */
      public boolean addAsHead( Object val) {
         Node newHead = new Node(val, headReference);
-        // System.out.println(newHead);
         headReference = newHead;
-        filledElements ++;
         return true;
      }
 
 
      public Node get( int index) {
-      return list[index];
+       Node node = headReference;
+       Object cargo = headReference.cargoReference();
+       for (int loop = 0; loop < index; node.getReferenceToNextNode()) {
+         cargo = node.getCargoReference();
+       }
+       return cargo;
      }
 
      public Node set( int index, Object value) {
       Node saveForReturn = get( index);
-      Node newNode = new Node(value, list[index + 1]);
-      list[index] = newNode;
+      get( index - 1).setReferenceToNextNode(new Node(value, get( index + 1)));
       return saveForReturn;
      }
 
      public Node remove( int index) {
-      Node result = list[index];
-      for (int fill = index; fill < filledElements; fill++) {
-        list[fill] = list[fill + 1];
-      }
-      filledElements--;
+      Node result = get( index);
+      get( index - 1).setReferenceToNextNode(get( index + 1));
       return result;
      }
 
@@ -80,13 +78,17 @@ public class List_inChainOfNodes{
       @return true "in keeping with conventions"
      */
      public boolean add( int index, Object value) {
-       Node addedNode = new Node(value, list[index]);
-       System.out.println(addedNode);
-       for (int hole = filledElements; hole > index; hole--) {
-         list[hole] = list[hole - 1];
+       if (index == 0) {
+         addAsHead(value);
        }
-       list[index] = addedNode;
-       list[index - 1].setReferenceToNextNode(addedNode);
+       else {
+         Node addedNode = new Node(value, get( index));
+         get( index - 1).setReferenceToNextNode(addedNode);
+         for (int loop = index; loop < size(); get( loop)) {
+           
+         }
+       }
+
        return true;
      }
 }
