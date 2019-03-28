@@ -17,7 +17,7 @@ public class List_inChainOfNodes{
      */
     public int size() {
       int result = 0;
-      for (Node node = headReference; node != null; node.getReferenceToNextNode()) {
+      for (Node node = headReference; node != null; node = node.getReferenceToNextNode()) {
         result++;
       }
       return result;
@@ -31,7 +31,7 @@ public class List_inChainOfNodes{
       */
     public String toString() {
       String stringList = "elements [";
-      for (Node node = headReference; node != null; node.getReferenceToNextNode()) {
+      for (Node node = headReference; node != null; node = node.getReferenceToNextNode()) {
         stringList = stringList + node.getCargoReference() + ",";
       }
       stringList += "]";
@@ -53,11 +53,11 @@ public class List_inChainOfNodes{
 
      public Node get( int index) {
        Node node = headReference;
-       Object cargo = headReference.cargoReference();
-       for (int loop = 0; loop < index; node.getReferenceToNextNode()) {
-         cargo = node.getCargoReference();
+       // Node cargo = headReference;
+       for (int loop = 0; loop < index; node = node.getReferenceToNextNode()) {
+         loop ++;
        }
-       return cargo;
+       return node;
      }
 
      public Node set( int index, Object value) {
@@ -83,10 +83,11 @@ public class List_inChainOfNodes{
        }
        else {
          Node addedNode = new Node(value, get( index));
+         // Node node = new Node("new");
          get( index - 1).setReferenceToNextNode(addedNode);
-         for (int loop = index; loop < size(); get( loop)) {
+         // for (int loop = size(); loop > index; node = get( loop)) {
            
-         }
+         // }
        }
 
        return true;
